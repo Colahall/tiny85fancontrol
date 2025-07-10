@@ -85,14 +85,13 @@ void uart_print(const char *s) {
 void uart_print_dec16(int16_t num) {
   int i = 8;       // Number of digits to print
   char negate = 0; // Flag for negative numbers
-  char buffer[9];  // Buffer to hold digits and newline
+  char buffer[7];  // Buffer to hold digits and newline
+  char *ptr = buffer + sizeof(buffer) - 1;
 
-  buffer[i--] = '\0'; // Null-terminate string
-  buffer[i--] = '\n'; // Add newline for readability
-  buffer[i--] = '\r'; // Add carriage return for readability
+  *ptr-- = '\0'; // Null-terminate string
 
   if (num == 0) {
-    buffer[i--] = '0'; // Special case for zero
+    *ptr-- = '0'; // Special case for zero
     goto end;          // Skip further processing
   }
 
@@ -102,18 +101,18 @@ void uart_print_dec16(int16_t num) {
   }
 
   while (num > 0 && i >= 0) {
-    buffer[i--] = (num % 10) + '0'; // Convert digit to character
+    *ptr-- = (num % 10) + '0'; // Convert digit to character
     num /= 10;
   }
 
   if (negate && i >= 0) {
-    buffer[i--] = '-'; // Add minus sign for negative numbers
+    *ptr-- = '-'; // Add minus sign for negative numbers
   }
 
-  ++i; // Adjust index to point to the first character
-
 end:
-  uart_print(buffer + i);
+
+  ++ptr; // Adjust to point to the first character
+  uart_print(ptr); // Print the buffer
 }
 
 /**

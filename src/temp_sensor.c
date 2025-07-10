@@ -94,5 +94,5 @@ int16_t temp_sensor_read_celsius(void) {
   raw_value /= 8; // Average the 8 samples
 
   // Convert to Celsius
-  return ((int16_t)raw_value) - 270; // Adjust for calibration offset
+  return ((int16_t)raw_value) - 273; // Adjust for calibration offset
 }

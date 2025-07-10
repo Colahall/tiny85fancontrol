@@ -23,38 +23,12 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+#ifndef TINY85FANCONTROL_DS18B20_H_
+#define TINY85FANCONTROL_DS18B20_H_
 
-#include "ds18b20.h"
-#include "temp_sensor.h"
-#include "uart.h"
+#include <stdint.h>
 
-#include <avr/io.h>
-#include <util/delay.h>
+int16_t ds18b20_read_raw(void);
+int16_t ds18b20_read_celsius(void);
 
-#define BUILD_VERSION "1.0.0"
-
-
-int main(void) {
-  uart_init();        // Initialize UART
-  temp_sensor_init(); // Initialize temperature sensor
-
-  uart_print("Tiny85 Fan Control\r\n");
-  uart_print("Build Version: " BUILD_VERSION "\r\n" );
-  uart_print("System Initialized\r\n"); // Print initialization message
-
-  for(;;) {
-    int16_t temp = temp_sensor_read_celsius();  // Read temperature in Celsius
-    int16_t ds18b20_temp = ds18b20_read_celsius(); // Read DS18B20 temperature
-
-    uart_print("Current Temp (internal): ");
-    uart_print_dec16(temp); // Print the raw temperature value
-    uart_print(" C\r\n");   // Print unit
-
-    uart_print("Current Temp (DS18B20): ");
-    uart_print_dec16(ds18b20_temp); // Print the raw temperature value
-    uart_print(" C\r\n");           // Print unit
-    _delay_ms(1000);                // Delay to avoid busy-waiting
-  }
-
-  return 0; // This line will never be reached
-}
+#endif // TINY85FANCONTROL_DS18B20_H_

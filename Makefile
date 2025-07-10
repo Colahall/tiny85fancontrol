@@ -16,6 +16,8 @@ CFLAGS := $(WARNING_FLAGS) $(CPU_FLAGS) $(INCLUDE_FLAGS)
 SOURCE := src/main.c \
        src/uart.c \
 	   src/temp_sensor.c \
+	   src/onewire.c \
+	   src/ds18b20.c \
 
 OBJECTS := $(patsubst %.c, %.o, $(SOURCE))
 TARGET := main

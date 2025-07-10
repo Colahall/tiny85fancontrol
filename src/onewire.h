@@ -23,38 +23,28 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+#ifndef TINY85FANCONTROL_ONEWIRE_H_
+#define TINY85FANCONTROL_ONEWIRE_H_
 
-#include "ds18b20.h"
-#include "temp_sensor.h"
-#include "uart.h"
+#include <stdint.h>
+#include <stdbool.h>
 
-#include <avr/io.h>
-#include <util/delay.h>
+#define ONEWIRE_PORT PORTB
+#define ONEWIRE_PIN PINB
+#define ONEWIRE_BIT PB1
+#define ONEWIRE_DDR DDRB
 
-#define BUILD_VERSION "1.0.0"
+#define ONEWIRE_RETRY_COUNT (128)
 
+enum {
+    ONEWIRE_LOW = 0,
+    ONEWIRE_HIGH = 1,
+    ONEWIRE_ERROR = 2,
+};
 
-int main(void) {
-  uart_init();        // Initialize UART
-  temp_sensor_init(); // Initialize temperature sensor
+uint8_t onewire_reset(void);
+uint8_t onewire_read_byte(void);
+bool onewire_read_bus(void);
+void onewire_write_byte(uint8_t data);
 
-  uart_print("Tiny85 Fan Control\r\n");
-  uart_print("Build Version: " BUILD_VERSION "\r\n" );
-  uart_print("System Initialized\r\n"); // Print initialization message
-
-  for(;;) {
-    int16_t temp = temp_sensor_read_celsius();  // Read temperature in Celsius
-    int16_t ds18b20_temp = ds18b20_read_celsius(); // Read DS18B20 temperature
-
-    uart_print("Current Temp (internal): ");
-    uart_print_dec16(temp); // Print the raw temperature value
-    uart_print(" C\r\n");   // Print unit
-
-    uart_print("Current Temp (DS18B20): ");
-    uart_print_dec16(ds18b20_temp); // Print the raw temperature value
-    uart_print(" C\r\n");           // Print unit
-    _delay_ms(1000);                // Delay to avoid busy-waiting
-  }
-
-  return 0; // This line will never be reached
-}
+#endif // TINY85FANCONTROL_ONEWIRE_H_
