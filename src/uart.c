@@ -30,17 +30,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-/**
- * UART Specific Definitions
- */
-#define UART_BAUD_RATE (9600UL)
-#define UART_BIT_TIME (1000000UL / UART_BAUD_RATE)
-
-/** PIN for Tx **/
-#define TX_PIN PB0
-#define TX_PORT PORTB
-#define TX_DDR DDRB
-
 static volatile uint8_t UART_INIT = 0;
 
 // Local function prototypes
@@ -53,8 +42,8 @@ void uart_init(void) {
   if (UART_INIT)
     return; // Prevent re-initialization
   UART_INIT = 1;
-  TX_DDR |= (1 << TX_PIN);  // Set TX_PIN as output
-  TX_PORT |= (1 << TX_PIN); // Set TX high (idle state)
+  UART_TX_DDR |= (1 << UART_TX_PIN);  // Set UART_TX_PIN as output
+  UART_TX_PORT |= (1 << UART_TX_PIN); // Set TX high (idle state)
 }
 
 /**
@@ -121,9 +110,9 @@ end:
  */
 static inline void uart_tx_bit(_Bool b) {
   if (b)
-    TX_PORT |= (1 << TX_PIN); // Set TX high for 1
+    UART_TX_PORT |= (1 << UART_TX_PIN); // Set TX high for 1
   else
-    TX_PORT &= ~(1 << TX_PIN); // Set TX low for 0
+    UART_TX_PORT &= ~(1 << UART_TX_PIN); // Set TX low for 0
 
   _delay_us(UART_BIT_TIME);
 }

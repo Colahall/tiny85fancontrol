@@ -24,27 +24,44 @@
  *
  */
 
-#ifndef TINY85FANCONTROL_SRC_UART_H_
-#define TINY85FANCONTROL_SRC_UART_H_
+#include "pwm.h"
 
-#include <stdint.h>
+#include <avr/io.h>
 
 /**
- * UART Specific Definitions
+ * Initialize Timer0 for 8-bit Fast PWM on OC0A (PB0).
+ *
+ * Steps:
+ * 1. Set PB0 as output (OC0A pin).
+ * 2. Configure Timer0 for Fast PWM (Mode 3): set WGM01 and WGM00.
+ * 3. Select non-inverting output: set COM0A1, clear COM0A0.
+ * 4. Choose prescaler = clk/1 by setting CS00 in TCCR0B.
+ *    → PWM frequency = F_CPU / 256 (~31.3 kHz at 8 MHz)
  */
-#define UART_BAUD_RATE (9600UL)
-#define UART_BIT_TIME (1000000UL / UART_BAUD_RATE)
+void pwm_init(void) {
+  PWM_DDR |= (1 << PWM_PIN); /* PB0 as output */
 
-/** PIN for Tx **/
-#define UART_TX_PIN PB2
-#define UART_TX_PORT PORTB
-#define UART_TX_DDR DDRB
+  TCCR0A = (1 << WGM01) | (1 << WGM00) /* Fast PWM mode */
+           | (1 << COM0A1);            /* Non-inverting on OC0A */
 
+  /* Use TCCR0B for prescaler: clk/1 → ~31.3 kHz PWM at 8 MHz */
+  TCCR0B = (1 << CS00);
+}
 
-// API Functions
-void uart_init(void);
-void uart_print(const char *s);
-void uart_print_dec16(int16_t num);
-int16_t temp_sensor_read_celsius(void);
+/**
+ * Set PWM duty cycle.
+ * @param duty 0 → 0% (always low), 255 → ~100% (always high).
+ */
+void pwm_set(uint8_t duty) { OCR0A = duty; }
 
-#endif /* TINY85FANCONTROL_SRC_UART_H_ */
+/**
+ * Disable PWM and force the output pin low.
+ *
+ * Steps:
+ * 1. Disconnect OC0A by clearing COM0A1 and COM0A0.
+ * 2. Drive PB0 low via PORT register.
+ */
+void pwm_off(void) {
+  TCCR0A &= ~((1 << COM0A1) | (1 << COM0A0)); /* Disconnect OC0A */
+  PWM_PORT &= ~(1 << PWM_PIN);                /* PB0 = 0 */
+}

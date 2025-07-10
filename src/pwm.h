@@ -24,27 +24,32 @@
  *
  */
 
-#ifndef TINY85FANCONTROL_SRC_UART_H_
-#define TINY85FANCONTROL_SRC_UART_H_
+#ifndef TINY85FANCONTROL_SRC_PWM_H_
+#define TINY85FANCONTROL_SRC_PWM_H_
+
+/**
+ * PWM driver for ATtiny85 using Timer0 channel A (OC0A on PB0).
+ *
+ * - Uses 8-bit Fast PWM (Mode 3):
+ *     • WGM01=1, WGM00=1 → Fast PWM with TOP=0xFF
+ *     • COM0A1=1, COM0A0=0 → Non-inverting output: OC0A clears on compare match, sets at BOTTOM
+ * - Default prescaler = clk/1 → PWM frequency = F_CPU / 256
+ *   (~31.3 kHz at 8 MHz CPU clock)
+ *
+ * Functions:
+ *  • pwm_init():  Configure Timer0 and PB0 for PWM output
+ *  • pwm_set(d): Set duty cycle (0–255)
+ *  • pwm_off():  Disable PWM and drive PB0 low
+ */
 
 #include <stdint.h>
 
-/**
- * UART Specific Definitions
- */
-#define UART_BAUD_RATE (9600UL)
-#define UART_BIT_TIME (1000000UL / UART_BAUD_RATE)
+#define PWM_DDR   DDRB    /* Data Direction Register for PWM pin */
+#define PWM_PORT  PORTB   /* Port register for PWM pin */
+#define PWM_PIN   PB0     /* Pin number for OC0A (PB0) */
 
-/** PIN for Tx **/
-#define UART_TX_PIN PB2
-#define UART_TX_PORT PORTB
-#define UART_TX_DDR DDRB
+void pwm_init(void);
+void pwm_set(uint8_t duty);
+void pwm_off(void);
 
-
-// API Functions
-void uart_init(void);
-void uart_print(const char *s);
-void uart_print_dec16(int16_t num);
-int16_t temp_sensor_read_celsius(void);
-
-#endif /* TINY85FANCONTROL_SRC_UART_H_ */
+#endif /* TINY85FANCONTROL_SRC_PWM_H_ */

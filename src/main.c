@@ -25,6 +25,8 @@
  */
 
 #include "ds18b20.h"
+#include "pwm.h"
+#include "fan_curve.h"
 #include "temp_sensor.h"
 #include "uart.h"
 
@@ -33,27 +35,33 @@
 
 #define BUILD_VERSION "1.0.0"
 
-
 int main(void) {
+  pwm_init();         // Initialize PWM
   uart_init();        // Initialize UART
   temp_sensor_init(); // Initialize temperature sensor
 
-  uart_print("Tiny85 Fan Control\r\n");
-  uart_print("Build Version: " BUILD_VERSION "\r\n" );
-  uart_print("System Initialized\r\n"); // Print initialization message
+  uart_print("Tiny85 Fan Control (Table LERP)\r\n");
+  uart_print("Build Version: " BUILD_VERSION "\r\n");
+  uart_print("System Initialized\r\n");
 
-  for(;;) {
-    int16_t temp = temp_sensor_read_celsius();  // Read temperature in Celsius
-    int16_t ds18b20_temp = ds18b20_read_celsius(); // Read DS18B20 temperature
+  uint8_t current_pwm_duty = 0;
+  int16_t case_temp = 0;
 
-    uart_print("Current Temp (internal): ");
-    uart_print_dec16(temp); // Print the raw temperature value
-    uart_print(" C\r\n");   // Print unit
+  for (;;) {
+    case_temp = ds18b20_read_celsius();
 
-    uart_print("Current Temp (DS18B20): ");
-    uart_print_dec16(ds18b20_temp); // Print the raw temperature value
-    uart_print(" C\r\n");           // Print unit
-    _delay_ms(1000);                // Delay to avoid busy-waiting
+    uart_print("Current Temp = ");
+    uart_print_dec16(case_temp);
+    uart_print(" C, ");
+
+    current_pwm_duty = fan_curve_compute_pwm(case_temp);
+
+    pwm_set(current_pwm_duty);
+    uart_print("PWM Duty Cycle = ");
+    uart_print_dec16(current_pwm_duty);
+    uart_print("\r\n");
+
+    _delay_ms(2000); // Delay for a longer period (e.g., 2 seconds)
   }
 
   return 0; // This line will never be reached

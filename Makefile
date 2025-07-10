@@ -18,6 +18,8 @@ SOURCE := src/main.c \
 	   src/temp_sensor.c \
 	   src/onewire.c \
 	   src/ds18b20.c \
+	   src/pwm.c \
+	   src/fan_curve.c
 
 OBJECTS := $(patsubst %.c, %.o, $(SOURCE))
 TARGET := main

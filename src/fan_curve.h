@@ -23,28 +23,11 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-
-#ifndef TINY85FANCONTROL_SRC_UART_H_
-#define TINY85FANCONTROL_SRC_UART_H_
+#ifndef TINY85FANCONTROL_SRC_FAN_CURVE_H_
+#define TINY85FANCONTROL_SRC_FAN_CURVE_H_
 
 #include <stdint.h>
 
-/**
- * UART Specific Definitions
- */
-#define UART_BAUD_RATE (9600UL)
-#define UART_BIT_TIME (1000000UL / UART_BAUD_RATE)
+uint8_t fan_curve_compute_pwm(int16_t temperature);
 
-/** PIN for Tx **/
-#define UART_TX_PIN PB2
-#define UART_TX_PORT PORTB
-#define UART_TX_DDR DDRB
-
-
-// API Functions
-void uart_init(void);
-void uart_print(const char *s);
-void uart_print_dec16(int16_t num);
-int16_t temp_sensor_read_celsius(void);
-
-#endif /* TINY85FANCONTROL_SRC_UART_H_ */
+#endif /* TINY85FANCONTROL_SRC_FAN_CURVE_H_ */
