@@ -36,7 +36,8 @@ typedef struct {
 // The points MUST be sorted by temperature in ascending order.
 static const fan_curve_point_t fan_curve[] = {
     {25, 0},   // Example: Below 25C, fan is off
-    {27, 200},  // At 27C, fan is quiet ~60% duty cycle
+    {27, 128},  // At 27C, fan is quiet 50% duty cycle
+    {30, 192}, // At 30C, fan starts to ramp up
     {35, 210}, // At 35C, fan starts to ramp up
     {40, 220}, // At 40C, fan is more audible
     {50, 230}, // At 50C and above, fan is at near full speed
