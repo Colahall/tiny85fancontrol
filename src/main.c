@@ -47,6 +47,10 @@ int main(void) {
   uint8_t current_pwm_duty = 0;
   int16_t case_temp = 0;
 
+  // Set the PWM to max duty cycle initially until fan ramps up
+  pwm_set(255);
+  _delay_ms(9999);
+
   for (;;) {
     case_temp = ds18b20_read_celsius();
 
