@@ -56,6 +56,7 @@ To build this project, run `make` in the root directory of the project.
 cd /path/to/project/
 
 make        # Builds the binary
+make fuse   # Fuses the chip with the configuration
 make flash  # Uploads to the ATtiny85 via USBtinyISP
 ```
 
