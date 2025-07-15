@@ -17,7 +17,7 @@ A temperature-controlled fan system powered by an [ATtiny85](https://www.microch
 You'll need the following components:
 
 - [ATtiny85](https://www.microchip.com/en-us/product/attiny85) microcontroller
-- [USBtinyISP](http://www.fischl.de/usbtinyisp/) (or compatible ISP programmer)
+- [USBtinyISP](https://www.flashtree.com/products/11802) (or compatible ISP programmer)
 - [DS18B20](https://www.analog.com/media/en/technical-documentation/data-sheets/ds18b20.pdf) 1-Wire temperature sensor
 - Passive components (resistors, capacitors, etc.)
 
