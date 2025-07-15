@@ -21,15 +21,19 @@ SOURCE := src/main.c \
 	   src/pwm.c \
 	   src/fan_curve.c
 
-OBJECTS := $(patsubst %.c, %.o, $(SOURCE))
 TARGET := main
 
 CC := avr-gcc
 OBJCOPY := avr-objcopy
 
+.PHONY: all fuse flash clean
+
+all: ${TARGET}.bin ${TARGET}.hex
+
 # symbolic targets:
-help:
-	@echo "This Makefile has no default rule. Use one of the following:"
+${TARGET}.bin: $(SOURCE)
+	${CC} ${CFLAGS} -o ${TARGET}.bin ${SOURCE}; \
+	${OBJCOPY} -j .text -j .data -O ihex ${TARGET}.bin ${TARGET}.hex
 
 # rule for programming fuse bits:
 fuse:
@@ -37,9 +41,6 @@ fuse:
 		{ echo "*** Edit Makefile and choose values for FUSE_L and FUSE_H!"; exit 1; }
 	$(AVRDUDE) -U hfuse:w:$(FUSE_H):m -U lfuse:w:$(FUSE_L):m
 
-all:
-	${CC} ${CFLAGS} -o ${TARGET}.bin ${SOURCE}; \
-	${OBJCOPY} -j .text -j .data -O ihex ${TARGET}.bin ${TARGET}.hex
 
 flash:
 		$(AVRDUDE) -U flash:w:${TARGET}.hex:i
