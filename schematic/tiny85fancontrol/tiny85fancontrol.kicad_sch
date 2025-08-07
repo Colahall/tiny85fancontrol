@@ -2335,16 +2335,16 @@
 		(uuid "e43d673f-681a-47bc-8759-1aad566a5830")
 	)
 	(no_connect
-		(at 142.24 83.82)
-		(uuid "38f82eb9-c668-466e-9abe-27c815e4627c")
+		(at 142.24 93.98)
+		(uuid "6b7b679c-e13d-46db-82ff-0d00d0d68423")
 	)
 	(no_connect
-		(at 142.24 86.36)
-		(uuid "6713878a-dc72-4155-8dbe-d338ddaf70f6")
+		(at 142.24 91.44)
+		(uuid "6dd02607-13bf-4794-a233-3c29dffdb9ec")
 	)
 	(no_connect
-		(at 142.24 88.9)
-		(uuid "7274cbb0-92d0-497d-a332-dca76ed414ff")
+		(at 142.24 96.52)
+		(uuid "b111eefe-e560-443a-9269-e31b29b0f7f5")
 	)
 	(wire
 		(pts
@@ -2385,16 +2385,6 @@
 			(type default)
 		)
 		(uuid "10280513-324e-41e8-8918-189162f73189")
-	)
-	(wire
-		(pts
-			(xy 168.91 91.44) (xy 142.24 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1051697e-a0b5-4431-b15d-493fbc4d80b0")
 	)
 	(wire
 		(pts
@@ -2478,6 +2468,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 88.9) (xy 156.21 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28d11b75-6b92-4223-837a-8c4c02314dcd")
+	)
+	(wire
+		(pts
 			(xy 59.69 138.43) (xy 59.69 148.59)
 		)
 		(stroke
@@ -2555,6 +2555,16 @@
 			(type default)
 		)
 		(uuid "5a266db6-90a9-412b-a95e-0d28a22a307d")
+	)
+	(wire
+		(pts
+			(xy 165.1 83.82) (xy 165.1 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e751b3c-49ce-4820-87b9-2cd8dff98a78")
 	)
 	(wire
 		(pts
@@ -2738,6 +2748,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 86.36) (xy 161.29 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9cc8939a-2394-4c0a-8891-6deeeb10750a")
+	)
+	(wire
+		(pts
 			(xy 219.71 62.23) (xy 219.71 67.31)
 		)
 		(stroke
@@ -2758,16 +2778,6 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 93.98) (xy 142.24 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b4a074cf-8fe2-43fe-90f8-9b299148a76a")
-	)
-	(wire
-		(pts
 			(xy 219.71 34.29) (xy 236.22 34.29)
 		)
 		(stroke
@@ -2778,6 +2788,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 86.36) (xy 161.29 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1d984fa-7823-4fab-87a4-ec5a4df71e47")
+	)
+	(wire
+		(pts
 			(xy 43.18 151.13) (xy 43.18 156.21)
 		)
 		(stroke
@@ -2785,16 +2805,6 @@
 			(type default)
 		)
 		(uuid "c4f4e503-33d5-4b57-81c1-dbdea010d311")
-	)
-	(wire
-		(pts
-			(xy 161.29 96.52) (xy 142.24 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c6116832-8c39-485f-aea7-81141fb00002")
 	)
 	(wire
 		(pts
@@ -2828,16 +2838,6 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 118.11) (xy 165.1 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d41c608d-0dc2-4646-9dab-89991047afe4")
-	)
-	(wire
-		(pts
 			(xy 30.48 34.29) (xy 40.64 34.29)
 		)
 		(stroke
@@ -2858,6 +2858,16 @@
 	)
 	(wire
 		(pts
+			(xy 165.1 83.82) (xy 142.24 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbdf1347-46c6-4503-bc6e-aff5ae968327")
+	)
+	(wire
+		(pts
 			(xy 40.64 49.53) (xy 30.48 49.53)
 		)
 		(stroke
@@ -2865,6 +2875,16 @@
 			(type default)
 		)
 		(uuid "ded786be-61b1-428a-a2b7-20ad9513b20d")
+	)
+	(wire
+		(pts
+			(xy 142.24 88.9) (xy 156.21 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dfd44110-f745-4202-b2d9-49f03b98913c")
 	)
 	(wire
 		(pts
@@ -2886,28 +2906,8 @@
 		)
 		(uuid "e5238364-4e92-4aa3-98e5-ecafeee5a06d")
 	)
-	(wire
-		(pts
-			(xy 168.91 118.11) (xy 168.91 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f32b77dc-9e01-4bdb-87a2-6b118bab990c")
-	)
-	(wire
-		(pts
-			(xy 161.29 118.11) (xy 161.29 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f6426f13-4e36-44c1-b792-b3fa469a69a3")
-	)
 	(label "TEMPERATURE_SIGNAL"
-		(at 165.1 118.11 90)
+		(at 161.29 118.11 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2917,7 +2917,7 @@
 		(uuid "02fa4747-b9a1-436e-ba65-2e23c2de111d")
 	)
 	(label "PWM_SIGNAL"
-		(at 161.29 118.11 90)
+		(at 165.1 118.11 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2937,7 +2937,7 @@
 		(uuid "9fbe5291-3716-4872-9a94-1f582141b6d7")
 	)
 	(label "UART_DEBUG_TX"
-		(at 168.91 118.11 90)
+		(at 156.21 118.11 90)
 		(effects
 			(font
 				(size 1.27 1.27)
